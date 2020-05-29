@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		body{
+			margin: 0;
+		}
+		.intro{
+			max-height: 100vh;
+			overflow: hidden;
+		}
+		.video{
+			position: relative;
+		}
+		.video-media{
+			width: 100%;
+			height: 100%;
+
+			position: relative;
+			top: 0;
+			left: 0;
+		}
+		h2{
+			position: absolute;
+			color: white;
+			top: 0px;
+			left: 0px;
+			font-size: 7vh
+		}
+		.game{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			background-color: pink;
+			border: 3px solid white;
+			border-radius: 100%;
+			padding: 15px;
+			color: white;
+			font-size: 25px;
+			display: none
+		}
+		p{
+			padding: 0px;
+			margin: 0px;
+			font-size: 5vh
+		}
+	</style>
+</head>
+<body>
+	<div class="intro">
+		<div class="video">
+			<video class="video-media" src="video/Untitled.mp4" autoplay loop muted></video>
+		</div>
+	</div>
+	<h2>Score: <span class="score">0</span></h2>
+	<script src="jquery-3.5.0.js"></script>
+	<script type="text/javascript">
+		let scors = [100, 250, 500]
+		let colors = ["pink", "green", "blue"]
+		let score = 0
+
+		function random(a){
+			var rand = Math.random() * a
+			var rand2 = Math.round(rand)
+			return rand2
+		}
+
+		let game = setInterval(function(){
+			$("<button class='btn game'></button>").appendTo($("body")).html("<p>" + scors[random(2)] + "</p>").fadeIn(500).css("top", random(window.innerHeight) - 75 + "px").css("left", function(){if (random(window.innerWidth) < 75){return random(window.innerWidth) + 75 + "px"} else {return random(window.innerWidth) - 75 + "px"}}).css("background-color", colors[random(2)]).click(function(){
+			$(this).hide()
+			if ($(this).text() == 100){var chislo = 100}
+			if ($(this).text() == 250){var chislo = 250}
+			if ($(this).text() == 500){var chislo = 500}
+			score = score + chislo
+			$(".score").text(score)
+		}).fadeOut(3000)
+		}, 1000)
+		function stopGame(){
+			clearTimeout(game)
+		}
+		setTimeout(stopGame, 87000)
+	</script>
+</body>
+</html>
